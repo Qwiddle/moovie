@@ -28,10 +28,6 @@ export const SearchBar = () => {
     return res.json();
   })
 
-  if (isLoading) return 'Loading...'
-
-  if (error) return 'An error has occurred: ' + error.message
-
   return (
     //form handles hitting enter in an active search bar however it does not handle button clicks.
     <>
