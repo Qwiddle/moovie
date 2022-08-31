@@ -6,9 +6,14 @@
   flex-direction: column;
 }
 
+.logo {
+  min-width: 456px;
+  padding-bottom: 25px;
+  pointer-events: none;
+}
+
 .App-logo {
   height: 40vmin;
-  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
