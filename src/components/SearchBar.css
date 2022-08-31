@@ -1,3 +1,21 @@
 .searchbar {
   width: 50vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.searchbar > .bar {
+  width: 50vw;
+  min-width: 200px;
+}
+
+.searchbutton {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.searchbutton > .button {
+  height: 70%;
 }
