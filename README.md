@@ -3,7 +3,7 @@
 1. Clone repo: `git clone https://github.com/Qwiddle/moovie`
 2. Install required packages: `npm install`
 3. Request a free API key from [The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction)
-
+4. Rename `env.example` to `.env.local` and add your API key.
 ## Available Scripts
 
 In the project directory, you can run:
