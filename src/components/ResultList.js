@@ -3,6 +3,7 @@ import './ResultList.css';
 
 export const ResultList = ({data}) => {
   return (
+    data ?
     <div className="results">
       {data.results.map((movie) => (
         <div key={movie.id}>
@@ -13,6 +14,6 @@ export const ResultList = ({data}) => {
           <strong>🍴 {movie.vote_count}</strong>
         </div>
       ))}
-    </div>
+    </div> : ''
   );
 }

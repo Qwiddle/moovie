@@ -8,28 +8,17 @@ import { useQuery } from 'react-query';
 export const SearchBar = () => {
   const [input, setInput] = useState("");
 
-  const handleInput = (e) => {
-    const value = e.target.value;
-    setInput(value.toLowerCase());
-  }
-  
+  const { isLoading, data } = useQuery(['search', input], async () => {
+    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
+    return res.json();
+  }, { enabled: !!input });
+
   const handleEnter = (e) => {
     e.preventDefault();
-    //do something
+    setInput(e.target.elements["outlined-basic"].value.toLowerCase());
   }
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    //do something
-  }
-
-  const { isLoading, error, data } = useQuery(['repoData'], async () => {
-    const res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_TMDB}`)
-    return res.json();
-  })
 
   return (
-    //form handles hitting enter in an active search bar however it does not handle button clicks.
     <>
       <form onSubmit={handleEnter}>
         <div className="searchbar">
@@ -37,21 +26,21 @@ export const SearchBar = () => {
             <TextField
               className="input"
               id="outlined-basic"
-              onChange={handleInput}
               variant="outlined"
               fullWidth
               label="Search" />
           </div>
-
           <div className="searchbutton">
-            <Button variant="contained" className="button" onClick={handleClick}>Search</Button>
+            <Button variant="contained" className="button" type="submit">Search</Button>
           </div>
         </div>
       </form>
       <div className="searchresults">
-        {isLoading 
+        {
+          isLoading
           ? 'Loading...'
-          : <ResultList data={data}/>}
+          : <ResultList data={data}/>
+        }
       </div>
     </>
   );
