@@ -1,5 +1,6 @@
 .searchbar {
   width: 50vw;
+  min-width: 420px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -7,15 +8,19 @@
 
 .searchbar > .bar {
   width: 50vw;
-  min-width: 320px;
+  min-width: 260px;
 }
 
 .searchbutton {
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  margin-left: 20px;
 }
 
 .searchbutton > .button {
   height: 70%;
+}
+
+#filter {
+  margin-left: 10px;
 }

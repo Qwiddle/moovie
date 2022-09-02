@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import './SearchBar.css';
-import TextField from "@mui/material/TextField";
+import { IconButton, TextField } from '@mui/material';
+import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
 import { ResultList } from './ResultList';
 import { useQuery } from 'react-query';
 
 export const SearchBar = () => {
+  const filters = useState({
+    lang: 'en',
+    type: 'movie',
+    adult: false,
+    region: 'us',
+  });
+
   const [input, setInput] = useState("");
 
   const { isLoading, data } = useQuery(['search', input], async () => {
@@ -33,6 +41,9 @@ export const SearchBar = () => {
           <div className="searchbutton">
             <Button variant="contained" className="button" type="submit">Search</Button>
           </div>
+          <IconButton aria-label="filter" id="filter">
+            <TuneIcon />
+          </IconButton>
         </div>
       </form>
       <div className="searchresults">
