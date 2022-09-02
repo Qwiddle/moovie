@@ -4,6 +4,7 @@ import { IconButton, TextField } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
 import { ResultList } from './ResultList';
+import { Filter } from './Filter';
 import { useQuery } from 'react-query';
 
 export const SearchBar = () => {
@@ -14,21 +15,25 @@ export const SearchBar = () => {
     region: 'us',
   });
 
-  const [input, setInput] = useState("");
+  const [ openFilter, setFilter ] = useState(false);
+  const [ input, setInput ] = useState("");
+
+  const handleFilterOpen = () => setFilter(true);
+  const handleFilterClose = () => setFilter(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInput(e.target.elements["outlined-basic"].value.toLowerCase());
+  }
 
   const { isLoading, data } = useQuery(['search', input], async () => {
     const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
     return res.json();
   }, { enabled: !!input });
 
-  const handleEnter = (e) => {
-    e.preventDefault();
-    setInput(e.target.elements["outlined-basic"].value.toLowerCase());
-  }
-
   return (
     <>
-      <form onSubmit={handleEnter}>
+      <form onSubmit={handleSubmit}>
         <div className="searchbar">
           <div className="bar">
             <TextField
@@ -41,7 +46,7 @@ export const SearchBar = () => {
           <div className="searchbutton">
             <Button variant="contained" className="button" type="submit">Search</Button>
           </div>
-          <IconButton aria-label="filter" id="filter">
+          <IconButton aria-label="filter" id="filter" onClick={handleFilterOpen}>
             <TuneIcon />
           </IconButton>
         </div>
@@ -51,6 +56,13 @@ export const SearchBar = () => {
           isLoading
           ? 'Loading...'
           : <ResultList data={data}/>
+        }
+      </div>
+      <div className='filtermodal'>
+        {
+          openFilter ?
+          <Filter props={{filters, openFilter, handleFilterClose}} />
+          : ''
         }
       </div>
     </>
