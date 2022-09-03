@@ -9,7 +9,14 @@ import { useQuery } from 'react-query';
 
 export const SearchBar = () => {
   const [ input, setInput ] = useState("");
+  const [ openFilterView, setFilterView ] = useState(false);
 
+  const handleFilterOpen = () => setFilterView(true);
+  const handleFilterClose = () => setFilterView(false);
+  
+  const handleFilterChange = useCallback((f) => { setFilters(f); }, []);
+
+  //should save to localStorge & pull from there
   const [ filters, setFilters ] = useState({
     lang: 'en',
     type: 'movie',
@@ -19,21 +26,40 @@ export const SearchBar = () => {
     region: 'us',
   });
 
-  const [ openFilterView, setFilterView ] = useState(false);
-
-  const handleFilterOpen = () => setFilterView(true);
-  const handleFilterClose = () => setFilterView(false);
-  
-  const handleFilterChange = useCallback((f) => { setFilters(f); }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setInput(e.target.elements["outlined-basic"].value.toLowerCase());
   }
 
   const { isLoading, data } = useQuery(['search', input], async () => {
-    const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
-    return res.json();
+    const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
+    const json = await res.json();
+
+    /* this could probably be written a lot cleaner, refactor incoming lol */
+    const results = json.results.map((result) => {
+      if(filters.movie && result.title) { 
+        result = { name: result.title, ...result};
+      } else if(result.known_for) {
+        //do something
+      } else if(filters.tv && result.name) {
+        result = { name: result.name, ...result};
+      }
+
+      return result;
+
+    }).filter((result) => {
+      if(result.media_type == 'tv' && !filters.tv) {
+        return false;
+      } else if(result.media_type == 'movie' && !filters.movie) {
+        return false;
+      } else if(result.media_type == 'person') {
+        //not handling people atm
+      } else {
+        return true;
+      }
+    });
+
+    return results;
   }, { 
     enabled: !!input 
   });
