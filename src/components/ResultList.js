@@ -4,17 +4,45 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { red } from '@mui/material/colors';
 
 
-export const ResultList = ({data}) => {
+export const ResultList = ({data, filters}) => {
+  // this could probably be written a lot cleaner, refactor incoming
+  const filterResults = (json) => {
+    const results = json.results.map((result) => {
+      if(filters.movie && result.title) { 
+        result = { name: result.title, ...result};
+      } else if(result.known_for) {
+        //do something
+      } else if(filters.tv && result.name) {
+        result = { name: result.name, ...result};
+      }
+
+      return result;
+
+    }).filter((result) => {
+      if(result.media_type == 'tv' && !filters.tv) {
+        return false;
+      } else if(result.media_type == 'movie' && !filters.movie) {
+        return false;
+      } else if(result.media_type == 'person') {
+        //not handling people atm
+      } else {
+        return true;
+      }
+    });
+
+    return results;
+  }
+  
   return (
     data ?
     <div className="results">
-      {data.map((result) => (
+      {filterResults(data).map((result) => (
         <div key={result.id} className="item">
           <div className="header">
-            <IconButton aria-label="favorite" className="favorite">
+            <h1>{result.name}</h1>
+            <IconButton aria-label="favorite" className="favorite" key={100} onClick={() => {console.log('hi')}}>
               <FavoriteIcon sx={{color: red[800]}} />
             </IconButton>
-            <h1>{result.name}</h1>
           </div>
           <p>{result.overview}</p>
           <strong>👀 {result.popularity}</strong>{' '}

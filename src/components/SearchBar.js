@@ -35,31 +35,7 @@ export const SearchBar = () => {
     const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
     const json = await res.json();
 
-    /* this could probably be written a lot cleaner, refactor incoming lol */
-    const results = json.results.map((result) => {
-      if(filters.movie && result.title) { 
-        result = { name: result.title, ...result};
-      } else if(result.known_for) {
-        //do something
-      } else if(filters.tv && result.name) {
-        result = { name: result.name, ...result};
-      }
-
-      return result;
-
-    }).filter((result) => {
-      if(result.media_type == 'tv' && !filters.tv) {
-        return false;
-      } else if(result.media_type == 'movie' && !filters.movie) {
-        return false;
-      } else if(result.media_type == 'person') {
-        //not handling people atm
-      } else {
-        return true;
-      }
-    });
-
-    return results;
+    return json;
   }, { 
     enabled: !!input 
   });
@@ -88,7 +64,7 @@ export const SearchBar = () => {
         {
           isLoading
           ? 'Loading...'
-          : <ResultList data={data}/>
+          : <ResultList data={data} filters={filters}/>
         }
       </div>
       <div className='filtermodal'>
