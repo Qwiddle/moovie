@@ -1,4 +1,3 @@
-import { useQuery } from 'react-query';
 import './ResultList.css';
 
 export const ResultList = ({data}) => {
