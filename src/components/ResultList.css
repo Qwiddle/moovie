@@ -2,3 +2,18 @@
   padding: 20px;
   max-width: 900px;
 }
+
+.results>.item {
+  padding: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+}
+
+.favorite {
+  height: 40px;
+}
