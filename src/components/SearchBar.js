@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './SearchBar.css';
 import { IconButton, TextField } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -8,18 +8,23 @@ import { Filter } from './Filter';
 import { useQuery } from 'react-query';
 
 export const SearchBar = () => {
-  const filters = useState({
+  const [ input, setInput ] = useState("");
+
+  const [ filters, setFilters ] = useState({
     lang: 'en',
     type: 'movie',
+    movie: true,
+    tv: false,
     adult: false,
     region: 'us',
   });
 
-  const [ openFilter, setFilter ] = useState(false);
-  const [ input, setInput ] = useState("");
+  const [ openFilterView, setFilterView ] = useState(false);
 
-  const handleFilterOpen = () => setFilter(true);
-  const handleFilterClose = () => setFilter(false);
+  const handleFilterOpen = () => setFilterView(true);
+  const handleFilterClose = () => setFilterView(false);
+  
+  const handleFilterChange = useCallback((f) => { setFilters(f); }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +34,9 @@ export const SearchBar = () => {
   const { isLoading, data } = useQuery(['search', input], async () => {
     const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
     return res.json();
-  }, { enabled: !!input });
+  }, { 
+    enabled: !!input 
+  });
 
   return (
     <>
@@ -60,8 +67,8 @@ export const SearchBar = () => {
       </div>
       <div className='filtermodal'>
         {
-          openFilter ?
-          <Filter props={{filters, openFilter, handleFilterClose}} />
+          openFilterView ?
+          <Filter props={{filters, handleFilterChange, openFilterView, handleFilterClose}} />
           : ''
         }
       </div>
