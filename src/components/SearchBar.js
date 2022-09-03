@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import './SearchBar.css';
-import { IconButton, TextField } from '@mui/material';
+import { IconButton, TextField, Typography } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import { Button } from '@mui/material';
 import { ResultList } from './ResultList';
@@ -42,6 +42,9 @@ export const SearchBar = () => {
 
   return (
     <>
+      <Typography variant="h2" component="h2" className="logo">
+        Moovie 🐮
+      </Typography>
       <form onSubmit={handleSubmit}>
         <div className="searchbar">
           <div className="bar">

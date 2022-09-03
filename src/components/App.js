@@ -9,9 +9,6 @@ function App() {
     <main className="App">
       <ResponsiveAppBar />
       <div className="appcontainer">
-        <Typography variant="h2" component="h2" className="logo">
-          Moovie 🐮
-        </Typography>
         <Outlet />
       </div>
     </main>
