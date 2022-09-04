@@ -8,6 +8,7 @@ import { Trending } from './components/Trending';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SearchBar } from './components/SearchBar';
+import { Favorites } from './components/Favorites';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +22,7 @@ root.render(
             <Route index element={<SearchBar />} />
             <Route path="trending" element={<Trending />} />
             <Route path="search" element={<SearchBar />} />
+            <Route path="favorites" element={<Favorites />} />
           </Route>
         </Routes>
       </BrowserRouter>
