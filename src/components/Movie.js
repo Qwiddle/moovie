@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { Card,
+import { Image } from "mui-image";
+import {
   Divider,
-  CardContent,
-  CardMedia,
   Button,
   Typography 
 
@@ -24,39 +23,36 @@ export const Movie = () => {
   });
 
   return (
-    isLoading ? 
+    isLoading ?
       'Loading...' :
-      <Card className='movie-item'>
-        <CardMedia
-          className='movie-media'
-          image={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-        />
-        <CardContent className='movie-content'>
-          <Typography
-            className={"MuiTypography--heading"}
-            variant={"h6"}
-            gutterBottom
-          >
-            {data.title}
-            <Favorite cid={params.cid} type="movie" />
-          </Typography>
-          <Typography
-            className={"MuiTypography--subheading"}
-            variant={"caption"}
-          >
-            {data.overview}
-          </Typography>
+      <div 
+        type="movie" 
+        className="movie-item">
+        <Image 
+          src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+          fit="cover"
+          height="40vh"
+          className="movie-media"
+          />
+        <div className="movie-content">
+          <div className="movie-header">
+            <h1>{data.title}</h1>
+            <Favorite cid={Number(params.cid)} type="movie"/>
+          </div>
+          <p>{data.overview}</p>
+          <strong>👀 {data.popularity}</strong>{' '}
+          <strong>✨ {data.vote_average}</strong>{' '}
+          <strong>🔄 {data.vote_count}</strong>
           <Divider className='movie-divider' light>
             <Typography
-              className={"MuiTypography--subheading"}
               variant={"caption"}
             >
               options
             </Typography>
           </Divider>
-          <Button variant="contained" sx={{ mx: 0.5, mt: 0.5 }}>Share</Button>
-          <Button variant="contained" sx={{ mx: 0.5, mt: 0.5 }}>Recommend similar</Button>
-        </CardContent>
-      </Card>
+          <Button variant="contained" sx={{ mt: 0.5 }}>Share</Button>
+          <Button variant="contained" sx={{ mt: 0.5 }}>Recommend similar</Button>
+        </div>
+      </div>
   )
 }
