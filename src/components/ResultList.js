@@ -1,7 +1,5 @@
 import './ResultList.css';
-import { Button, IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { red } from '@mui/material/colors';
+import { Favorite } from './Favorite';
 
 
 export const ResultList = ({data, filters}) => {
@@ -37,12 +35,14 @@ export const ResultList = ({data, filters}) => {
     data ?
     <div className="results">
       {filterResults(data).map((result) => (
-        <div key={result.id} className="item">
+        <div 
+          key={result.id} 
+          cid={result.id} 
+          type={result.media_type} 
+          className="item">
           <div className="header">
             <h1>{result.name}</h1>
-            <IconButton aria-label="favorite" className="favorite" key={100} onClick={() => {console.log('hi')}}>
-              <FavoriteIcon sx={{color: red[800]}} />
-            </IconButton>
+            <Favorite cid={result.id} type={result.media_type}/>
           </div>
           <p>{result.overview}</p>
           <strong>👀 {result.popularity}</strong>{' '}
