@@ -6,8 +6,7 @@ import { useOutletContext } from "react-router-dom";
 export const Favorite = ({cid, type}) => {
   const [favorites, setFavorites] = useOutletContext();
 
-  const handleFavorite = (e) => {
-
+  const handleFavorite = () => {
     if(!favorites.find(f => f.cid == cid && f.type == type)) {
       setFavorites(prev => [{cid, type}, ...prev]);
     } else {
