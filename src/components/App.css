@@ -1,9 +1,11 @@
 .App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .appcontainer {
-  min-height: 80vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
