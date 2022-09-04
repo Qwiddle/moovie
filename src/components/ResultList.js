@@ -1,6 +1,6 @@
 import './ResultList.css';
 import { Favorite } from './Favorite';
-
+import { Link } from 'react-router-dom';
 
 export const ResultList = ({data, filters}) => {
   // this could probably be written a lot cleaner, refactor incoming
@@ -22,7 +22,7 @@ export const ResultList = ({data, filters}) => {
       } else if(result.media_type === 'movie' && !filters.movie) {
         return false;
       } else if(result.media_type === 'person') {
-        //not handling people atm
+        return false;
       }
 
       return true;
@@ -41,7 +41,9 @@ export const ResultList = ({data, filters}) => {
           type={result.media_type} 
           className="item">
           <div className="header">
-            <h1>{result.name}</h1>
+            <Link to={`../${result.media_type}/${result.id}`}>
+              <h1>{result.name}</h1>
+            </Link>
             <Favorite cid={result.id} type={result.media_type}/>
           </div>
           <p>{result.overview}</p>
