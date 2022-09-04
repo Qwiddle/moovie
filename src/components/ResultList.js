@@ -17,15 +17,15 @@ export const ResultList = ({data, filters}) => {
       return result;
 
     }).filter((result) => {
-      if(result.media_type == 'tv' && !filters.tv) {
+      if(result.media_type === 'tv' && !filters.tv) {
         return false;
-      } else if(result.media_type == 'movie' && !filters.movie) {
+      } else if(result.media_type === 'movie' && !filters.movie) {
         return false;
-      } else if(result.media_type == 'person') {
+      } else if(result.media_type === 'person') {
         //not handling people atm
-      } else {
-        return true;
       }
+
+      return true;
     });
 
     return results;

@@ -1,5 +1,3 @@
-import { SearchBar } from './SearchBar';
-import { Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
@@ -11,7 +9,7 @@ function App() {
   useEffect(() => {
     const localFavorites = JSON.parse(window.localStorage.getItem('favorites'));
 
-    if(localFavorites != "[]")
+    if(localFavorites !== "[]")
       setFavorites(JSON.parse(localFavorites));
   }, []);
 
