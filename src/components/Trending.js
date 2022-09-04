@@ -32,7 +32,7 @@ export const Trending = () => {
 
   return (
     <>
-      <Typography variant="h3" component="h3" className="logo">
+      <Typography variant="h2" component="h2" className="logo">
         Trending 🔥
       </Typography>
       <IconButton aria-label="filter" id="filter" onClick={handleFilterOpen}>
