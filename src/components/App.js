@@ -1,12 +1,24 @@
 import { SearchBar } from './SearchBar';
 import { Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import './App.css';
 
 function App() {
   const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const localFavorites = JSON.parse(window.localStorage.getItem('favorites'));
+
+    if(localFavorites != "[]")
+      setFavorites(JSON.parse(localFavorites));
+  }, []);
+
+  useEffect(() => {
+    //stringify used twice in order to properly store an object of arrays
+    window.localStorage.setItem('favorites', JSON.stringify(JSON.stringify(favorites)));
+  }, [favorites]);
 
   return (
     <main className="App">
