@@ -5,6 +5,7 @@ ImageListItem,
 ImageListItemBar,
 IconButton } from "@mui/material";
 import InfoIcon from '@mui/icons-material/Info';
+import { Favorite } from "./Favorite";
 
 export const ContentListImage = ({content}) => {
   const navigate = useNavigate();
@@ -30,12 +31,13 @@ export const ContentListImage = ({content}) => {
             title={result.title || result.name}
             subtitle={`🔥 ${result.popularity}`}
             actionIcon={
+              <><Favorite cid={result.id} type={result.media_type} />
               <IconButton
                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                 aria-label={`info about ${result.title}`}
                 onClick={() => handleFollowThrough(result.id, result.media_type)}>
                 <InfoIcon />
-              </IconButton>
+              </IconButton></>
             }/>
         </ImageListItem>
       ))}
