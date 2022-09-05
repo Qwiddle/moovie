@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TheatersIcon from '@mui/icons-material/Theaters';
 import { Link } from "react-router-dom";
 
-const pages = ['search', 'trending', 'recommend'];
+const pages = ['search', 'trending'];
 const settings = ['Settings', 'Favorites'];
 
 const ResponsiveAppBar = () => {
