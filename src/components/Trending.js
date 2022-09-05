@@ -25,17 +25,21 @@ export const Trending = () => {
 
   const { isLoading, data } = useQuery(['trending'], async () => {
     const res = await fetch(`https://api.themoviedb.org/3/search/trending?api_key=${process.env.REACT_APP_API_TMDB}&media_type=all`)
-    const json = await res.json();
-
-    return json;
+    return await res.json();
   });
 
   return (
     <>
-      <Typography variant="h2" component="h2" className="logo">
+      <Typography 
+        variant="h2" 
+        component="h2" 
+        className="logo">
         Trending 🔥
       </Typography>
-      <IconButton aria-label="filter" id="filter" onClick={handleFilterOpen}>
+      <IconButton 
+        aria-label="filter" 
+        id="filter" 
+        onClick={handleFilterOpen}>
         <TuneIcon />
       </IconButton>
       <div className="trendingresults">
@@ -46,8 +50,13 @@ export const Trending = () => {
       </div>
       <div className='filtermodal'>
         { openFilterView ?
-          <Filter props={{filters, handleFilterChange, openFilterView, handleFilterClose}} />
-          : ''
+          <Filter 
+            props={{
+              filters, 
+              handleFilterChange, 
+              openFilterView, 
+              handleFilterClose
+            }} /> : ''
         }
       </div>
     </>
