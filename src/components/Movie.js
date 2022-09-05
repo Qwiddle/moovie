@@ -5,7 +5,6 @@ import {
   Divider,
   Button,
   Typography 
-
 } from '@mui/material';
 import { Favorite } from "./Favorite";
 import './Movie.css';
@@ -32,8 +31,9 @@ export const Movie = () => {
           src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
           fit="cover"
           height="40vh"
+          duration={0}
           className="movie-media"
-          />
+        />
         <div className="movie-content">
           <div className="movie-header">
             <h1>{data.title}</h1>
@@ -44,14 +44,20 @@ export const Movie = () => {
           <strong>✨ {data.vote_average}</strong>{' '}
           <strong>🔄 {data.vote_count}</strong>
           <Divider className='movie-divider' light>
-            <Typography
-              variant={"caption"}
-            >
+            <Typography variant={"caption"}>
               options
             </Typography>
           </Divider>
-          <Button variant="contained" sx={{ mt: 0.5 }}>Share</Button>
-          <Button variant="contained" sx={{ mt: 0.5 }}>Recommend similar</Button>
+          <Button 
+            variant="contained" 
+            sx={{ mt: 0.5 }}>
+            Share
+          </Button>
+          <Button 
+            variant="contained" 
+            sx={{ mt: 0.5 }}>
+            Recommend similar
+          </Button>
         </div>
       </div>
   )
