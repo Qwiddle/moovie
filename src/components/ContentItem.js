@@ -32,7 +32,7 @@ export const ContentItem = ({data, cid}) => {
       <div className="item-content">
         <div className="item-header">
           <h1>{data.name || data.title}</h1>
-          <Favorite cid={Number(cid)} type={data.media_type}/>
+          <Favorite cid={Number(cid)} type={type}/>
         </div>
         <p>{data.overview}</p>
         <strong>👀 {data.popularity}</strong>{' '}

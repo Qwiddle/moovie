@@ -9,7 +9,8 @@ function App() {
   useEffect(() => {
     const localFavorites = JSON.parse(window.localStorage.getItem('favorites'));
 
-    setFavorites(JSON.parse(localFavorites));
+    if(localFavorites !== "[]")
+      setFavorites(JSON.parse(localFavorites));
   }, []);
 
   useEffect(() => {
