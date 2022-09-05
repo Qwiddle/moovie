@@ -41,10 +41,14 @@ export const ResultList = ({data, filters}) => {
           type={result.media_type} 
           className="item">
           <div className="header">
-            <Link to={`../${result.media_type}/${result.id}`} style={{textDecoration: 'none'}}>
+            <Link 
+              to={`../${result.media_type}/${result.id}`} 
+              style={{textDecoration: 'none'}}>
               <h1>{result.name}</h1>
             </Link>
-            <Favorite cid={result.id} type={result.media_type}/>
+            <Favorite 
+              cid={result.id} 
+              type={result.media_type}/>
           </div>
           <p>{result.overview}</p>
           <strong>👀 {result.popularity}</strong>{' '}
