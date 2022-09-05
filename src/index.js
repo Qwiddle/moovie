@@ -10,6 +10,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { SearchBar } from './components/SearchBar';
 import { Favorites } from './components/Favorites';
 import { Movie } from './components/Movie';
+import { Recommend } from './components/Recommend';
+import { TV } from './components/TV';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +27,8 @@ root.render(
             <Route path="search" element={<SearchBar />} />
             <Route path="favorites" element={<Favorites />} />
             <Route path="movie/:cid" element={<Movie />} />
+            <Route path="tv/:cid" element={<TV />} />
+            <Route path="recommend/:type/:cid" element={<Recommend />} />
           </Route>
         </Routes>
       </BrowserRouter>
