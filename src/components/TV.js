@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { ContentItem } from "./ContentItem";
-import './ContentItem.css';
+import './css/ContentItem.css';
 
 export const TV = () => {
   const params = useParams();
