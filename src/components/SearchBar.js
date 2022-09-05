@@ -24,7 +24,7 @@ export const SearchBar = () => {
     lang: 'en',
     type: 'movie',
     movie: true,
-    tv: false,
+    tv: true,
     adult: false,
     region: 'us',
   });
