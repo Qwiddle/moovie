@@ -1,15 +1,16 @@
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ImageList,
 ImageListItem,
 ImageListItemBar,
 IconButton } from "@mui/material";
 import InfoIcon from '@mui/icons-material/Info';
-import { Favorite } from "./Favorite";
 
 export const ContentListImage = ({content}) => {
   const navigate = useNavigate();
-  const handleFollowThrough = useCallback((id, media_type) => navigate(`../${media_type}/${id}`, {replace: true}));
+  const location = useLocation();
+
+  const handleFollowThrough = useCallback((id, type) => navigate(`../${type}/${id}`, {replace: true}));
 
   return (
     <ImageList 
@@ -29,13 +30,12 @@ export const ContentListImage = ({content}) => {
             title={result.title || result.name}
             subtitle={`🔥 ${result.popularity}`}
             actionIcon={
-              <><IconButton
+              <IconButton
                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                 aria-label={`info about ${result.title}`}
                 onClick={() => handleFollowThrough(result.id, result.media_type)}>
                 <InfoIcon />
               </IconButton>
-              <Favorite cid={result.id} type={result.media_type} /></>
             }/>
         </ImageListItem>
       ))}
