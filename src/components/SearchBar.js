@@ -1,11 +1,14 @@
 import { useState, useCallback } from 'react';
-import './SearchBar.css';
-import { IconButton, TextField, Typography } from '@mui/material';
+import { useQuery } from 'react-query';
 import TuneIcon from '@mui/icons-material/Tune';
-import { Button } from '@mui/material';
 import { ResultList } from './ResultList';
 import { Filter } from './Filter';
-import { useQuery } from 'react-query';
+import './SearchBar.css';
+import { IconButton, 
+  TextField, 
+  Typography, 
+  Button 
+} from '@mui/material';
 
 export const SearchBar = () => {
   const [ input, setInput ] = useState("");
@@ -33,16 +36,17 @@ export const SearchBar = () => {
 
   const { isLoading, data } = useQuery(['search', input], async () => {
     const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_API_TMDB}&query=${input}`)
-    const json = await res.json();
-
-    return json;
+    return await res.json();
   }, { 
     enabled: !!input 
   });
 
   return (
     <>
-      <Typography variant="h2" component="h2" className="logo">
+      <Typography 
+        variant="h2" 
+        component="h2" 
+        className="logo">
         Moovie 🐮
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -56,25 +60,36 @@ export const SearchBar = () => {
               label="Search" />
           </div>
           <div className="searchbutton">
-            <Button variant="contained" className="button" type="submit">Search</Button>
+            <Button 
+              variant="contained" 
+              className="button" 
+              type="submit">
+              Search
+            </Button>
           </div>
-          <IconButton aria-label="filter" id="filter" onClick={handleFilterOpen}>
+          <IconButton 
+            aria-label="filter" 
+            id="filter" 
+            onClick={handleFilterOpen}>
             <TuneIcon />
           </IconButton>
         </div>
       </form>
       <div className="searchresults">
-        {
-          isLoading
+        { isLoading
           ? 'Loading...'
           : <ResultList data={data} filters={filters}/>
         }
       </div>
       <div className='filtermodal'>
-        {
-          openFilterView ?
-          <Filter props={{filters, handleFilterChange, openFilterView, handleFilterClose}} />
-          : ''
+        { openFilterView ?
+          <Filter
+            props={{
+              filters, 
+              handleFilterChange, 
+              openFilterView, 
+              handleFilterClose
+            }} /> : ''
         }
       </div>
     </>
