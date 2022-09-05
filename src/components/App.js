@@ -13,7 +13,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    //stringify used twice in order to properly store an object of arrays
+    //stringify used twice in order to properly store an object of arrays in localstorage
     window.localStorage.setItem('favorites', JSON.stringify(JSON.stringify(favorites)));
   }, [favorites]);
 
