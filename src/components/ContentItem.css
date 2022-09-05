@@ -1,0 +1,19 @@
+.item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+}
+
+.item-item {
+  max-width: 70vw
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
