@@ -11,7 +11,7 @@ import { Modal,
   Checkbox
 } from '@mui/material';
 
-import './Filter.css';
+import './css/Filter.css';
 
 export const Filter = ({ props }) => {
   const setFilter = (key, value) => { props.handleFilterChange({ ...props.filters, [key]: value }); }

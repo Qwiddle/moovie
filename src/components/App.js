@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ResponsiveAppBar from './ResponsiveAppBar';
-import './App.css';
+import './css/App.css';
 
 function App() {
   const [favorites, setFavorites] = useState([]);

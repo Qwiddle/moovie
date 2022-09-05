@@ -7,7 +7,7 @@ import {
   Typography 
 } from '@mui/material';
 import { Favorite } from "./Favorite";
-import './ContentItem.css';
+import './css/ContentItem.css';
 
 export const ContentItem = ({data, cid}) => {
   const navigate = useNavigate();

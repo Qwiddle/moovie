@@ -1,4 +1,4 @@
-import './ResultList.css';
+import './css/ResultList.css';
 import { Favorite } from './Favorite';
 import { Link } from 'react-router-dom';
 

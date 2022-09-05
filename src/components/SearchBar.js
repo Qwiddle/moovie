@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import TuneIcon from '@mui/icons-material/Tune';
 import { ResultList } from './ResultList';
 import { Filter } from './Filter';
-import './SearchBar.css';
+import './css/SearchBar.css';
 import { IconButton, 
   TextField, 
   Typography, 
